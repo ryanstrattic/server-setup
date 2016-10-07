@@ -9,14 +9,14 @@ Point domain at new IP address
 == https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
 
 # Setup new user
-Ubuntu 16.04 with public key authentication
-ssh root@IPAddress # Log in as root
-adduser ryan # Create new user (set password, choose defaults for rest)
-usermod -aG sudo ryan # Give new user sudo priviledges
+	Ubuntu 16.04 with public key authentication
+	ssh root@IPAddress # Log in as root
+	adduser ryan # Create new user (set password, choose defaults for rest)
+	usermod -aG sudo ryan # Give new user sudo priviledges
 
 # Check new users login
-exit # Log out of root
-ssh ryan@IPAddress # Log in as new user
+	exit # Log out of root
+	ssh ryan@IPAddress # Log in as new user
 
 # Set user to not require pasword
 mkdir ~/.ssh
