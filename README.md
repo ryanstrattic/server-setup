@@ -467,3 +467,7 @@ xxxxxxxxxxx NOT IMPLEMENTED YET XXXXXXXXXXXXX
 
 		# Automatic WordPress backups
 		@daily bash /var/www/wordpress-backups.sh
+
+
+# ADD AUTO GIT PUSH SCRIPT
+# TURN ON DEBUG, BUT WITH LOGGING OUT OF WEB FOLDER
