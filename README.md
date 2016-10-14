@@ -1,5 +1,6 @@
 * Point domain at new IP address
 * MOUNT 20 GB DRIVE AND USE THAT INSTEAD OF /VAR/WWW/
+* Implementation time tested at 50 minutes
 
 
 == https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
@@ -34,7 +35,7 @@ sudo ufw enable # Enable UFW (select "y")
 
 # Install Nginx
 sudo apt-get update
-sudo apt-get install nginx (select "Y")
+sudo apt-get install nginx (select default "Y")
 
 # Allow Nginx in UFW firewall
 sudo ufw allow 'Nginx HTTP'
@@ -48,6 +49,11 @@ sudo nano /etc/nginx/sites-available/default
 		location ~ /.well-known {
 			allow all;
 		}
+
+# Specific steps for when mounting an extra drive (also need to modify Nginx config to match)
+sudo mkdir /var/www/html/ # Make sure folder actually exists (important for when using mounted drive)
+sudo server nginx restart # Required when using mounted drive, since you would have modified the Nginx config by now
+
 sudo letsencrypt certonly -a webroot --webroot-path=/var/www/html -d droplet3.hellyer.kiwi # Create certificates
 
 # Check Lets Encrypt certificates were indeed created
@@ -227,7 +233,7 @@ sudo nano /etc/php/7.0/fpm/php.ini
 		#Set this to 0. Needed for security reasons.
 		cgi.fix_pathinfo=0
 
-sudo nano /etc/nginx/sites-enabled/default
+sudo nano /etc/nginx/sites-available/default
 		# Change Varnish server block to this: - note this should probably be done earlier to simplify install
 
 		# Varnish Server block
@@ -337,7 +343,7 @@ sudo nano /etc/nginx/global/wordpress.conf
 
 		# Directives to send expires headers and turn off 404 error logging.
 		location ~* ^.+\.(ogg|ogv|svg|svgz|eot|otf|woff|mp4|ttf|rss|atom|jpg|jpeg|gif|png|ico|zip|tgz|gz|rar|bz2|doc|xls|exe|ppt|tar|mid|midi|wav|bmp|rtf)$ {
-		       access_log off; log_not_found off; expires max;
+			access_log off; log_not_found off; expires max;
 		}
 
 		# Uncomment one of the lines below for the appropriate caching plugin (if used).
@@ -400,11 +406,12 @@ sudo mv wp-cli.phar /usr/local/bin/wp
 sudo chown ryan:ryan html/
 cd /var/www/html/
 wp core download
-wp core config --dbname=wordpress --dbuser=ryan --dbpass=66536653 --dbhost=localhost --dbprefix=test3
-# add to wp-config.php - needed so that WordPress knows we're using https and isn't confused by Varnish. Should probably be fixed in Varnish config
+wp core config --dbname=wordpress --dbuser=ryan --dbpass=66536653 --dbhost=localhost --dbprefix=test
+sudo nano /var/www/html/wp-config.php # needed so that WordPress knows we're using https and isn't confused by Varnish. Should probably be fixed in Varnish config
 		if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
 			$_SERVER['HTTPS']='on';
 		}
+sudo mv /var/www/html/wp-config.php /var/www/wp-config.php # No point in storing wp-config.php in the web root
 wp core install --url=https://droplet3.hellyer.kiwi --title="Test Site" --admin_user=ryan --admin_password=66536653 --admin_email=ryanhellyer@gmail.com
 wp rewrite structure '/%postname%/'
 
@@ -434,11 +441,12 @@ sudo nano /var/www/wordpress-updates.sh
 		wp theme update --all
 		#need to find some way to check wp core verify-checksums
 
+
+
+
 # Backup all files and database to another server, via RSync
 
-NEED TO MAKE PUBLIC KEY AUTHENTICATION BETWEEN BACKUP AND MAIN SERVER WORK
-
-# Login as root (maybe can do this via sudo?)
+# Login as root - MOVE TO BEFORE CHANGING ACCOUNTS
 ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 cat ~/.ssh/id_rsa.pub
 # Copy public key to the ~/.ssh/authorized_keys file on the external server
