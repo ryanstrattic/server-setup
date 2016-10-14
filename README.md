@@ -1,5 +1,5 @@
 * Point domain at new IP address
-* MOUNT 20 GB DRIVE AND USE THAT INSTEAD OF /VAR/WWW/
+* MOUNT 20 GB DRIVE AND USE THAT INSTEAD OF /VAR/WWW/ - automatically mounts on reboot
 * Implementation time tested at 50 minutes
 
 == https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
