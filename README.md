@@ -7,7 +7,9 @@ Ubuntu 16.04 with public key authentication
 
 # Setup new user
 > ssh root@IPAddress # Log in as root
+
 > adduser ryan # Create new user (set password, choose defaults for rest)
+
 > usermod -aG sudo ryan # Give new user sudo priviledges
 
 # Check new users login
