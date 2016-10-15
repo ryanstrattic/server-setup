@@ -1,3 +1,5 @@
+XXXX
+
 # Things to do first
 * Install Ubuntu 16.04 with public key authentication
 * Point domain at new IP address
@@ -8,7 +10,8 @@
 * List all variables at start of document
 * Just replace whole .vlc file instead of editing
 * Just replace whole nginx.conf and default instead of editing
-* Implement WP Cron via real Cron
+
+# ADD AUTO GIT PUSH SCRIPT
 
 
 == https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
@@ -490,6 +493,24 @@ xxxxxxxxxxx NOT IMPLEMENTED YET XXXXXXXXXXXXX
 		# Automatic WordPress backups
 		@daily bash /var/www/wordpress-backups.sh
 
+# Implement real Cron jobs
+sudo nano /var/www/wp-config.php
+	/**
+	 * Disabling WP Cron.
+	 * Tasks will be handled by a real Cron instead (which loads the wp-cron.php file).
+	 */
+	define('DISABLE_WP_CRON', true);
+sudo crontab -e
+	# Firing up the WordPress Cron system
+	* * * * * wget -q -O - https://droplet3.hellyer.kiwi/wp-cron.php?doing_wp_cron
 
-# ADD AUTO GIT PUSH SCRIPT
-# TURN ON DEBUG, BUT WITH LOGGING OUT OF WEB FOLDER
+
+
+
+
+# Copy servers public key to GitHub - https://github.com/settings/ssh
+cat ~/.ssh/id_rsa.pub
+
+# Clone the Git repository
+git clone git@github.com:ryanhellyer/server-setup.git .
+
