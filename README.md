@@ -1,4 +1,5 @@
-XXXX
+BLA BLA LBA 
+ZZZXXXX
 
 # Things to do first
 * Install Ubuntu 16.04 with public key authentication
