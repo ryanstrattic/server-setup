@@ -1,9 +1,17 @@
+# Things to do first
+* Install Ubuntu 16.04 with public key authentication
 * Point domain at new IP address
 * MOUNT 20 GB DRIVE AND USE THAT INSTEAD OF /VAR/WWW/ - automatically mounts on reboot
+
+# Notes and required improvements
 * Implementation time tested at 50 minutes
+* List all variables at start of document
+* Just replace whole .vlc file instead of editing
+* Just replace whole nginx.conf and default instead of editing
+* Implement WP Cron via real Cron
+
 
 == https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
-Ubuntu 16.04 with public key authentication
 
 # Setup new user
 	ssh root@IPAddress # Log in as root
@@ -397,6 +405,20 @@ Ubuntu 16.04 with public key authentication
 			$_SERVER['HTTPS']='on';
 		}
 	sudo mv /var/www/html/wp-config.php /var/www/wp-config.php # No point in storing wp-config.php in the web root
+
+	# Add WordPress error logging
+	sudo nano /var/www/wp-config.php
+		/**
+		 * Improve error logging and move outside web root.
+		 * Adapted from https://gist.github.com/jrfnl/5925642
+		 */
+		define( 'WP_DEBUG', true );
+		define( 'WP_DEBUG_DISPLAY', false );
+		@error_reporting( -1 ); // everything, including E_STRICT and other newly introduced error levels.
+		@ini_set( 'log_errors', true );
+		@ini_set( 'log_errors_max_len', '0' );
+		@ini_set( 'error_log', '/var/www/wordpress-error.log' );
+
 	wp core install --url=https://droplet3.hellyer.kiwi --title="Test Site" --admin_user=ryan --admin_password=66536653 --admin_email=ryanhellyer@gmail.com
 	wp rewrite structure '/%postname%/'
 
@@ -429,7 +451,7 @@ xxxxxxxxxxx NOT IMPLEMENTED YET XXXXXXXXXXXXX
 
 
 
-# Backup all files and database to another server, via RSync
+# Backup all files and database to another server, via RSync (completed from this server, to avoid external server having access to production)
 
 # Login as root - MOVE TO BEFORE CHANGING ACCOUNTS
 	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
