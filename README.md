@@ -1,5 +1,3 @@
-XXXX
-
 # Things to do first
 * Install Ubuntu 16.04 with public key authentication
 * Point domain at new IP address
@@ -514,4 +512,18 @@ cat ~/.ssh/id_rsa.pub
 # Clone the Git repository
 git clone git@github.com:ryanhellyer/server-setup.git .
 
-ZZZZ
+# THESE NEED CHECKED - CAN CONFIRM REQUIRED COMMANDS BY RUNNING A TEST GIT COMMIT and looking at errors
+git config --user.email "ryanhellyer@gmail.com"
+git config --user.name "Ryan Hellyer"
+
+sudo nano /var/www/auto-deployment.sh
+	#!/bin/sh
+	clear
+	cd /var/www/html/server-setup/
+	git add --all >> /dev/null 
+	git commit -m 'Automated git commit' >> /dev/null 
+	git push origin master >> /dev/null
+
+crontab -e
+	# Auto deployment
+	* * * * *  bash /var/www/auto-deployment.sh
