@@ -79,7 +79,7 @@ Confirm the new login works with no password before continuing.
 	sudo apt-get install letsencrypt # select default "Y"
 	sudo mkdir /var/www/droplet3.hellyer.kiwi/
 	sudo mkdir /var/www/droplet3.hellyer.kiwi/public_html/
-	sudo server nginx restart
+	sudo service nginx restart
 	sudo letsencrypt certonly -a webroot --webroot-path=/var/www/droplet3.hellyer.kiwi/public_html/ -d droplet3.hellyer.kiwi
 
 # Check Lets Encrypt certificates were indeed created
