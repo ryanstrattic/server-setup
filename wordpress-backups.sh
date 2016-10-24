@@ -14,7 +14,7 @@ mysqldump -u ryan -p66536653 -h localhost wordpress > $BACKUP_SQL_FILE
 if [ ! -f $BACKUP_RUNNING_FILE ]
 	then
 	touch $BACKUP_RUNNING_FILE
-	rsync $BACKUP_DIR/* -avzhe ssh external_server_username@ExternalIPAddress:/external/server/path/
+	rsync $BACKUP_DIR/* -avzhe ssh external_server_username@IPExternalAddress:/external/server/path/
 fi
 
 # Backup task complete, so remove any files created during backup process

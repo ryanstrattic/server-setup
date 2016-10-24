@@ -25,7 +25,7 @@ var ryanuser =
 var ryansqluser = 
 var droplet3.hellyer.kiwi = 
 external_server_username = 
-ExternalIPAddress = 
+IPExternalAddress = 
 /external/server/path/ = 
 git@github.com:ryanhellyer/server-setup.git
 [Git email] ryanhellyer@gmail.com"
