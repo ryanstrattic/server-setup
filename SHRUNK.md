@@ -73,7 +73,8 @@ Confirm the new login works with no password before continuing.
 	sudo apt-get install nginx
 	sudo ufw allow 'Nginx HTTP'
 
-# Implement new Nginx configuration
+# Implement new Nginx configuration - copy default-temporary.conf
+	sudo nano /etc/nginx/sites-available/default
 
 # Setup Lets Encrypt
 	sudo apt-get install letsencrypt
