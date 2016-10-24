@@ -1,11 +1,8 @@
-BOOBS
-BLA BLA LBA 
-ZZZXXXX
 
 # Things to do first
 * Install Ubuntu 16.04 with public key authentication
 * Point domain at new IP address
-* MOUNT 20 GB DRIVE AND USE THAT INSTEAD OF /VAR/WWW/ - automatically mounts on reboot
+* MOUNT 20 GB DRIVE AND USE THAT INSTEAD OF /mnt/volume-fra1-02/ - automatically mounts on reboot
 
 # Notes and required improvements
 * Implementation time tested at 50 minutes
@@ -13,19 +10,16 @@ ZZZXXXX
 * Just replace whole .vlc file instead of editing
 * Just replace whole nginx.conf and default instead of editing
 
-# ADD AUTO GIT PUSH SCRIPT
-
-
 == https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
 
 # Setup new user
-	ssh root@IPAddress # Log in as root
+	ssh root@138.68.65.194 # Log in as root
 	adduser ryan # Create new user (set password, choose defaults for rest)
 	usermod -aG sudo ryan # Give new user sudo priviledges
 
 # Check new users login
 	exit # Log out of root
-	ssh ryan@IPAddress # Log in as new user
+	ssh ryan@138.68.65.194 # Log in as new user
 
 # Set user to not require pasword
 	mkdir ~/.ssh
@@ -63,19 +57,19 @@ ZZZXXXX
 		}
 
 # Specific steps for when mounting an extra drive (also need to modify Nginx config to match)
-	sudo mkdir /var/www/html/ # Make sure folder actually exists (important for when using mounted drive)
+	sudo mkdir /mnt/volume-fra1-02/html/ # Make sure folder actually exists (important for when using mounted drive)
 	sudo server nginx restart # Required when using mounted drive, since you would have modified the Nginx config by now
 
-	sudo letsencrypt certonly -a webroot --webroot-path=/var/www/html -d droplet3.hellyer.kiwi # Create certificates
+	sudo letsencrypt certonly -a webroot --webroot-path=/mnt/volume-fra1-02/html -d droplet6.hellyer.kiwi # Create certificates
 
 # Check Lets Encrypt certificates were indeed created
-	sudo ls -l /etc/letsencrypt/live/droplet3.hellyer.kiwi
+	sudo ls -l /etc/letsencrypt/live/droplet6.hellyer.kiwi
 
 	sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048 # Generate Diffie Hellman group - takes a while!
 
-	sudo nano /etc/nginx/snippets/ssl-droplet3.hellyer.kiwi.conf
-		ssl_certificate /etc/letsencrypt/live/droplet3.hellyer.kiwi/fullchain.pem;
-		ssl_certificate_key /etc/letsencrypt/live/droplet3.hellyer.kiwi/privkey.pem;
+	sudo nano /etc/nginx/snippets/ssl-droplet6.hellyer.kiwi.conf
+		ssl_certificate /etc/letsencrypt/live/droplet6.hellyer.kiwi/fullchain.pem;
+		ssl_certificate_key /etc/letsencrypt/live/droplet6.hellyer.kiwi/privkey.pem;
 	sudo nano /etc/nginx/snippets/ssl-params.conf
 		# from https://cipherli.st/
 		# and https://raymii.org/s/tutorials/Strong_SSL_Security_On_nginx.html
@@ -103,7 +97,7 @@ ZZZXXXX
 			# SSL configuration
 			listen 443 ssl http2 default_server;
 			listen [::]:443 ssl http2 default_server;
-			include snippets/ssl-droplet3.hellyer.kiwi.conf;
+			include snippets/ssl-droplet6.hellyer.kiwi.conf;
 			include snippets/ssl-params.conf;
 
 # Allow Nginx HTTPS through the firewall
@@ -113,7 +107,7 @@ ZZZXXXX
 # Reboot Nginx
 	sudo service nginx restart
 
-# Check if https working by visiting https://droplet3.hellyer.kiwi/ (not http as that'll get redirected later)
+# Check if https working by visiting https://droplet6.hellyer.kiwi/ (not http as that'll get redirected later)
 
 # Auto renew Lets Encrypt
 	sudo letsencrypt renew
@@ -146,7 +140,7 @@ ZZZXXXX
 		sub vcl_recv {
 
 			# Redirect http to https
-			if ( (req.http.host ~ "^(?i)droplet3.hellyer.kiwi") && req.http.X-Forwarded-Proto !~ "(?i)https") {
+			if ( (req.http.host ~ "^(?i)droplet6.hellyer.kiwi") && req.http.X-Forwarded-Proto !~ "(?i)https") {
 				return (synth(750, ""));
 			}
 
@@ -157,7 +151,7 @@ ZZZXXXX
 			# Redirect http to https
 			if (resp.status == 750) {
 				set resp.status = 301;
-				set resp.http.Location = "https://droplet3.hellyer.kiwi" + req.url;
+				set resp.http.Location = "https://droplet6.hellyer.kiwi" + req.url;
 				return(deliver);
 			}
 		}
@@ -177,7 +171,7 @@ ZZZXXXX
 		server {
 			listen 127.0.0.1:8080;
 
-			root /var/www/html/;
+			root /mnt/volume-fra1-02/html/;
 			index index.html;
 
 			location / {
@@ -242,7 +236,7 @@ ZZZXXXX
 		server {
 			listen 127.0.0.1:8080;
 
-			root /var/www/html/;
+			root /mnt/volume-fra1-02/html/;
 			index index.php;
 
 			location / {
@@ -359,7 +353,7 @@ ZZZXXXX
 			# SSL configuration
 			listen 443 ssl http2;
 			listen [::]:443 ssl http2;
-			include snippets/ssl-droplet3.hellyer.kiwi.conf;
+			include snippets/ssl-droplet6.hellyer.kiwi.conf;
 			include snippets/ssl-params.conf;
 
 			index index.php;
@@ -368,7 +362,7 @@ ZZZXXXX
 				allow all;
 			}
 
-			server_name droplet3.hellyer.kiwi;
+			server_name droplet6.hellyer.kiwi;
 
 
 			location / {
@@ -385,7 +379,7 @@ ZZZXXXX
 		server {
 			listen 127.0.0.1:8080;
 
-			root /var/www/html/;
+			root /mnt/volume-fra1-02/html/;
 			index index.php;
 
 			include global/restrictions.conf;
@@ -395,24 +389,24 @@ ZZZXXXX
 
 
 # Install WP CLI (it'd be nice to setup auto-updating in future)
-	cd /var/www/
+	cd /mnt/volume-fra1-02/
 	sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 	php wp-cli.phar --info # Check it works
 	sudo chmod +x wp-cli.phar
 	sudo mv wp-cli.phar /usr/local/bin/wp
 
 	sudo chown ryan:ryan html/
-	cd /var/www/html/
+	cd /mnt/volume-fra1-02/html/
 	wp core download
 	wp core config --dbname=wordpress --dbuser=ryan --dbpass=66536653 --dbhost=localhost --dbprefix=test
-	sudo nano /var/www/html/wp-config.php # needed so that WordPress knows we're using https and isn't confused by Varnish. Should probably be fixed in Varnish config
+	sudo nano /mnt/volume-fra1-02/html/wp-config.php # needed so that WordPress knows we're using https and isn't confused by Varnish. Should probably be fixed in Varnish config
 		if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
 			$_SERVER['HTTPS']='on';
 		}
-	sudo mv /var/www/html/wp-config.php /var/www/wp-config.php # No point in storing wp-config.php in the web root
+	sudo mv /mnt/volume-fra1-02/html/wp-config.php /mnt/volume-fra1-02/wp-config.php # No point in storing wp-config.php in the web root
 
 	# Add WordPress error logging
-	sudo nano /var/www/wp-config.php
+	sudo nano /mnt/volume-fra1-02/wp-config.php
 		/**
 		 * Improve error logging and move outside web root.
 		 * Adapted from https://gist.github.com/jrfnl/5925642
@@ -422,13 +416,13 @@ ZZZXXXX
 		@error_reporting( -1 ); // everything, including E_STRICT and other newly introduced error levels.
 		@ini_set( 'log_errors', true );
 		@ini_set( 'log_errors_max_len', '0' );
-		@ini_set( 'error_log', '/var/www/wordpress-error.log' );
+		@ini_set( 'error_log', '/mnt/volume-fra1-02/wordpress-error.log' );
 
-	wp core install --url=https://droplet3.hellyer.kiwi --title="Test Site" --admin_user=ryan --admin_password=66536653 --admin_email=ryanhellyer@gmail.com
+	wp core install --url=https://droplet6.hellyer.kiwi --title="Test Site" --admin_user=ryan --admin_password=66536653 --admin_email=ryanhellyer@gmail.com
 	wp rewrite structure '/%postname%/'
 
 # Make Git work with 
-	ssh-keygen -t rsa -b 4096 -C "your_email@example.com" # Need
+	ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com" # Need
 
 # Install Redis
 	sudo apt-get install redis-server redis-tools php-redis # Select default "Y"
@@ -439,36 +433,28 @@ ZZZXXXX
 	wp plugin uninstall hello
 	wp plugin uninstall akismet
 
-
-xxxxxxxxxxx NOT IMPLEMENTED YET XXXXXXXXXXXXX
-
 # Setup Cron jobs for WP CLI
-	sudo nano /var/www/wordpress-updates.sh
+	sudo nano /mnt/volume-fra1-02/wordpress-updates.sh
 		#!/bin/bash
 		clear
-		cd /var/www/html/
+		cd /mnt/volume-fra1-02/html/
 		wp core update
 		wp core update-db
 		wp plugin update --all
 		wp theme update --all
 		#need to find some way to check wp core verify-checksums
 
-
-
-
-# Backup all files and database to another server, via RSync (completed from this server, to avoid external server having access to production)
-
 # Login as root - MOVE TO BEFORE CHANGING ACCOUNTS
-	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+	ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
 	cat ~/.ssh/id_rsa.pub
 # Copy public key to the ~/.ssh/authorized_keys file on the external server
 
-	sudo nano /var/www/wordpress-backups.sh
+	sudo nano /mnt/volume-fra1-02/wordpress-backups.sh
 		#!/bin/bash
 		clear
 
 		# Setup
-		BACKUP_DIR="/var/www/"
+		BACKUP_DIR="/mnt/volume-fra1-02/"
 		BACKUP_RUNNING_FILE="$BACKUP_DIR/backup-running.txt"
 		DATE=$(date +"%Y-%m-%d")
 		BACKUP_SQL_FILE=$BACKUP_DIR/database-backup-$DATE.sql
@@ -490,13 +476,13 @@ xxxxxxxxxxx NOT IMPLEMENTED YET XXXXXXXXXXXXX
 # Automate updates and backups
 	sudo crontab -e
 		# Automatic WordPress updates
-		@hourly bash /var/www/wordpress-updates.sh
+		@hourly bash /mnt/volume-fra1-02/wordpress-updates.sh
 
 		# Automatic WordPress backups
-		@daily bash /var/www/wordpress-backups.sh
+		@daily bash /mnt/volume-fra1-02/wordpress-backups.sh
 
 # Implement real Cron jobs
-sudo nano /var/www/wp-config.php
+sudo nano /mnt/volume-fra1-02/wp-config.php
 	/**
 	 * Disabling WP Cron.
 	 * Tasks will be handled by a real Cron instead (which loads the wp-cron.php file).
@@ -504,16 +490,35 @@ sudo nano /var/www/wp-config.php
 	define('DISABLE_WP_CRON', true);
 sudo crontab -e
 	# Firing up the WordPress Cron system
-	* * * * * wget -q -O - https://droplet3.hellyer.kiwi/wp-cron.php?doing_wp_cron
+	* * * * * wget -q -O - https://droplet6.hellyer.kiwi/wp-cron.php?doing_wp_cron
 
-
-
-
-
-# Copy servers public key to GitHub - https://github.com/settings/ssh
-cat ~/.ssh/id_rsa.pub
-
-# Clone the Git repository
+# Auto-deployment from GitHub
+cat ~/.ssh/id_rsa.pub # Copy to GitHub - https://github.com/settings/ssh
 git clone git@github.com:ryanhellyer/server-setup.git .
+git config --user.email "ryanhellyer@gmail.com"
+git config --user.name "Ryan Hellyer"
+sudo nano /mnt/volume-fra1-02/auto-deployment.sh
+	#!/bin/sh
+	# Auto-deployment from Git
+	clear
+	cd /mnt/volume-fra1-02/html/
+	git pull origin master >> /dev/null 
 
-ZZZZ
+crontab -e
+	# Auto deployment from Git
+	* * * * *  bash /mnt/volume-fra1-02/auto-deployment.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Copy Pressabl network over
+wp search-replace

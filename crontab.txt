@@ -1,0 +1,8 @@
+# Automatic WordPress updates
+@hourly bash /var/www/wordpress-updates.sh
+
+# Automatic WordPress backups
+@daily bash /var/www/wordpress-backups.sh
+
+# Auto deployment from Git
+* * * * *  bash /var/www/auto-deployment.sh

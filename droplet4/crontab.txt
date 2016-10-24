@@ -1,0 +1,8 @@
+# Automatic WordPress updates
+@hourly bash /mnt/volume-fra1-02/wordpress-updates.sh
+
+# Automatic WordPress backups
+@daily bash /mnt/volume-fra1-02/wordpress-backups.sh
+
+# Auto deployment from Git
+* * * * *  bash /mnt/volume-fra1-02/auto-deployment.sh

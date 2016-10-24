@@ -10,9 +10,6 @@
 * Just replace whole .vlc file instead of editing
 * Just replace whole nginx.conf and default instead of editing
 
-# ADD AUTO GIT PUSH SCRIPT
-
-
 == https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
 
 # Setup new user
@@ -436,9 +433,6 @@
 	wp plugin uninstall hello
 	wp plugin uninstall akismet
 
-
-xxxxxxxxxxx NOT IMPLEMENTED YET XXXXXXXXXXXXX
-
 # Setup Cron jobs for WP CLI
 	sudo nano /var/www/wordpress-updates.sh
 		#!/bin/bash
@@ -449,11 +443,6 @@ xxxxxxxxxxx NOT IMPLEMENTED YET XXXXXXXXXXXXX
 		wp plugin update --all
 		wp theme update --all
 		#need to find some way to check wp core verify-checksums
-
-
-
-
-# Backup all files and database to another server, via RSync (completed from this server, to avoid external server having access to production)
 
 # Login as root - MOVE TO BEFORE CHANGING ACCOUNTS
 	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
@@ -503,28 +492,33 @@ sudo crontab -e
 	# Firing up the WordPress Cron system
 	* * * * * wget -q -O - https://droplet3.hellyer.kiwi/wp-cron.php?doing_wp_cron
 
-
-
-
-
-# Copy servers public key to GitHub - https://github.com/settings/ssh
-cat ~/.ssh/id_rsa.pub
-
-# Clone the Git repository
+# Auto-deployment from GitHub
+cat ~/.ssh/id_rsa.pub # Copy to GitHub - https://github.com/settings/ssh
 git clone git@github.com:ryanhellyer/server-setup.git .
-
-# THESE NEED CHECKED - CAN CONFIRM REQUIRED COMMANDS BY RUNNING A TEST GIT COMMIT and looking at errors
 git config --user.email "ryanhellyer@gmail.com"
 git config --user.name "Ryan Hellyer"
-
 sudo nano /var/www/auto-deployment.sh
 	#!/bin/sh
+	# Auto-deployment from Git
 	clear
-	cd /var/www/html/server-setup/
-	git add --all >> /dev/null 
-	git commit -m 'Automated git commit' >> /dev/null 
-	git push origin master >> /dev/null
+	cd /var/www/html/
+	git pull origin master >> /dev/null 
 
 crontab -e
-	# Auto deployment
+	# Auto deployment from Git
 	* * * * *  bash /var/www/auto-deployment.sh
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Copy Pressabl network over
+wp search-replace
