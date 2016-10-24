@@ -76,7 +76,7 @@ Confirm the new login works with no password before continuing.
 # Implement new Nginx configuration
 
 # Setup Lets Encrypt
-	sudo apt-get install letsencrypt # select default "Y"
+	sudo apt-get install letsencrypt
 	sudo mkdir /var/www/droplet3.hellyer.kiwi/
 	sudo mkdir /var/www/droplet3.hellyer.kiwi/public_html/
 	sudo service nginx restart
