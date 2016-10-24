@@ -13,12 +13,12 @@ server {
 	listen 443 ssl http2;
 	listen [::]:443 ssl http2;
 
-#	include snippets/ssl-droplet5.hellyer.kiwi.conf;
+#	include snippets/ssl-droplet3.hellyer.kiwi.conf;
 #	include snippets/ssl-params.conf;
 
 	index index.php;
 
-	server_name droplet5.hellyer.kiwi;
+	server_name droplet3.hellyer.kiwi;
 
 
 	location / {
