@@ -1,6 +1,13 @@
+
+/**
+ * Disabling WP Cron.
+ * Tasks will be handled by a real Cron instead (which loads the wp-cron.php file).
+ */
+define( 'DISABLE_WP_CRON', true );
+
 # Ensure that Varnish is aware that we are on https - this should probably be handled within Varnish itself
-if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
-	$_SERVER['HTTPS']='on';
+if ( isset( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) && $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] == 'https' ) {
+	$_SERVER[ 'HTTPS' ]='on';
 }
 
 /**
