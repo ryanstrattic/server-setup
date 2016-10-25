@@ -1,3 +1,8 @@
+# Ensure that Varnish is aware that we are on https - this should probably be handled within Varnish itself
+if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
+	$_SERVER['HTTPS']='on';
+}
+
 /**
  * Improve error logging and move outside web root.
  * Adapted from https://gist.github.com/jrfnl/5925642
