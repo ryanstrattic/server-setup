@@ -36,6 +36,9 @@ git@github.com:ryanhellyer/server-setup.git
 [WordPress username] wordpressadmin
 [WordPress password[ wordpresspassword
 [WordPress user email] wordpress@gmail.com
+var githubrepo = 
+var github@gmail.com = 
+var githubusername = 
 
 
 Select defaults unless otherwise specified.
@@ -205,14 +208,17 @@ Copy "crontab.txt".
 	sudo crontab -e
 
 # Auto-deployment from GitHub
-cat ~/.ssh/id_rsa.pub # Copy to GitHub - https://github.com/settings/ssh
-git clone git@github.com:ryanhellyer/server-setup.git .
-git config --user.email "ryanhellyer@gmail.com"
-git config --user.name "Ryan Hellyer"
+ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
+
+Copy to GitHub - https://github.com/settings/ssh
+	cat ~/.ssh/id_rsa.pub
+
+git clone git@github.com:githubrepo/server-setup.git .
+git config --user.email "github@gmail.com"
+git config --user.name "githubusername"
+
 Copy "auto-deployment.sh"
-sudo nano /var/www/auto-deployment.sh
-
-
+	sudo nano /mnt/volume-nyc1-01/auto-deployment.sh
 
 
 # Copy Pressabl network over
