@@ -222,6 +222,10 @@ git config --user.name "githubusername"
 Copy "auto-deployment.sh"
 	sudo nano /mnt/volume-nyc1-01/auto-deployment.sh
 
+# Hardening WordPress - WORK IN PROGRESS - GET MORE FROM https://codex.wordpress.org/Hardening_WordPress
+sudo chmod 744 uploads -R
+sudo chmod 600 ../../wp-config.php
+
 
 # Copy Pressabl network over
 wp search-replace
