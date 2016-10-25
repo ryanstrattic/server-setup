@@ -98,10 +98,6 @@ Allow Nginx HTTPS through the firewall
 	sudo ufw allow 'Nginx Full'
 Reboot Nginx
 	sudo service nginx restart
-Renew - not sure if this is needed
-	sudo letsencrypt renew
-Setup auto renewal of http certificates - copy "sudo-crontab.txt".
-	sudo crontab -e
 
 # Install Varnish
 Add Varnish repository to aptitude.
@@ -183,7 +179,7 @@ Install WordPress.
 Set permalinks.
 	wp rewrite structure '/%postname%/'
 
-# Make Git work with 
+# Make Git work
 	ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
 
 # Install Redis
@@ -204,20 +200,9 @@ Copy "wordpress-updates.sh".
 Copy "wordpress-backups.sh".
 	sudo nano /var/www/wordpress-backups.sh
 
-# Automate updates and backups
+# Automate stuff
 Copy "crontab.txt".
 	sudo crontab -e
-
-# Implement real Cron jobs
-sudo nano /var/www/wp-config.php
-	/**
-	 * Disabling WP Cron.
-	 * Tasks will be handled by a real Cron instead (which loads the wp-cron.php file).
-	 */
-	define('DISABLE_WP_CRON', true);
-sudo crontab -e
-	# Firing up the WordPress Cron system
-	* * * * * wget -q -O - https://droplet3.hellyer.kiwi/wp-cron.php?doing_wp_cron
 
 # Auto-deployment from GitHub
 cat ~/.ssh/id_rsa.pub # Copy to GitHub - https://github.com/settings/ssh
