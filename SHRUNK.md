@@ -181,6 +181,7 @@ Install WordPress.
 	wp core install --url=https://droplet3.hellyer.kiwi --title="Test Site" --admin_user=wordpressadmin --admin_password=wordpresspassword --admin_email=wordpress@gmail.com
 Set permalinks.
 	wp rewrite structure '/%postname%/'
+	sudo chown www-data:www-data uploads -R
 
 # Make Git work
 	ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
