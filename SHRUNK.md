@@ -140,30 +140,24 @@ Set MariaDB root password
 	[mysql] update user set plugin='' where User='root'; # Forcing password usage
 	[mysql] flush privileges;
 	[mysql] SET PASSWORD FOR 'root'@'localhost' = PASSWORD('SQLRootPassword');
-	[mysql] exit;
-Check password works
-	mysql -u root -pSQLRootPassword
 Create new database and add new user to it
 	[mysql]CREATE DATABASE wordpressdb;
 	[mysql]GRANT ALL PRIVILEGES ON wordpressdb.* To 'ryansqluser'@'localhost' IDENTIFIED BY 'MyNewPassword';
 	[mysql] exit;
 
-# Check new user can log in
-	mysql -u ryansqluser -pMyNewPassword
-	[mysql] exit;
-
 # Install PHP 7
 Install PHP FPM and PHP MySQL
 	sudo apt-get install php-fpm php-mysql
+
 Change "cgi.fix_pathinfo" to "0" for improved security.
 	sudo nano /etc/php/7.0/fpm/php.ini
-Copy "nginx.conf"
-	sudo nano /etc/nginx/nginx.conf
+
+Replace existing files with "nginx.conf", "restrictions.conf" and "wordpress.conf"
 	sudo mkdir /etc/nginx/global/
-Copy "restrictions.conf"
 	sudo nano /etc/nginx/global/restrictions.conf
-Copy "wordpress.conf"
+	sudo nano /etc/nginx/nginx.conf
 	sudo nano /etc/nginx/global/wordpress.conf
+
 Replace with "default.txt".
 	sudo nano /etc/nginx/sites-available/default
 
