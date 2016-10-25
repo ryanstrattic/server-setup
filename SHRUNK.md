@@ -168,7 +168,7 @@ Replace with "default.txt".
 	sudo chmod +x wp-cli.phar
 	sudo mv wp-cli.phar /usr/local/bin/wp
 
-	sudo chown ryanuser:ryanuser html/
+	sudo chown ryan:ryan droplet3.hellyer.kiwi/public_html/
 	cd /var/www/droplet3.hellyer.kiwi/public_html/
 	wp core download
 	wp core config --dbname=wordpressdb --dbuser=ryansqluser --dbpass=66536653 --dbhost=localhost --dbprefix=test
