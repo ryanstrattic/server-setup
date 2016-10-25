@@ -172,14 +172,12 @@ Replace with "default.txt".
 	cd /var/www/droplet3.hellyer.kiwi/public_html/
 	wp core download
 	wp core config --dbname=wordpressdb --dbuser=ryansqluser --dbpass=66536653 --dbhost=localhost --dbprefix=test
-	sudo nano /var/www/droplet3.hellyer.kiwi/wp-config.php # needed so that WordPress knows we're using https and isn't confused by Varnish. Should probably be fixed in Varnish config
-		if ( isset( $_SERVER['HTTP_X_FORWARDED_PROTO'] ) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https' ) {
-			$_SERVER['HTTPS']='on';
-		}
-	sudo mv /var/www/droplet3.hellyer.kiwi/public_html/wp-config.php /var/www/wp-config.php # No point in storing wp-config.php in the web root
+
+Move wp-config.php outside of the web root
+	sudo mv /var/www/droplet3.hellyer.kiwi/public_html/wp-config.php /var/www/droplet3.hellyer.kiwi/wp-config.php
 
 Add "wp-config.php" to beginning of file.
-	sudo nano /var/www/droplet3.hellyer.kiwi/wp-config.php
+	sudo nano /var/www/droplet3.hellyer.kiwi/public_html/wp-config.php
 Install WordPress.
 	wp core install --url=https://droplet3.hellyer.kiwi --title="Test Site" --admin_user=wordpressadmin --admin_password=wordpresspassword --admin_email=wordpress@gmail.com
 Set permalinks.
