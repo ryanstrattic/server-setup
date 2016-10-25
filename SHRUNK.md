@@ -24,6 +24,7 @@ var your_email@example.com =
 var ryanuser = 
 var ryansqluser = 
 var SQLRootPassword = 
+var wordpressdb = 
 var droplet3.hellyer.kiwi = 
 external_server_username = 
 IPExternalAddress = 
