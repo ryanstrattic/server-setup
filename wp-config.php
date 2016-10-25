@@ -5,7 +5,10 @@
  */
 define( 'DISABLE_WP_CRON', true );
 
-# Ensure that Varnish is aware that we are on https - this should probably be handled within Varnish itself
+/**
+ * Ensure that Varnish is aware that we are on https.
+ * Note: This should probably be handled within Varnish itself instead.
+ */
 if ( isset( $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] ) && $_SERVER[ 'HTTP_X_FORWARDED_PROTO' ] == 'https' ) {
 	$_SERVER[ 'HTTPS' ]='on';
 }
