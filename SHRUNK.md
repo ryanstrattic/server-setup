@@ -23,6 +23,7 @@ var IPAddress =
 var your_email@example.com = 
 var ryanuser = 
 var ryansqluser = 
+var SQLRootPassword = 
 var droplet3.hellyer.kiwi = 
 external_server_username = 
 IPExternalAddress = 
@@ -34,6 +35,7 @@ git@github.com:ryanhellyer/server-setup.git
 [WordPress username] wordpressadmin
 [WordPress password[ wordpresspassword
 [WordPress user email] wordpress@gmail.com
+
 
 Select defaults unless otherwise specified.
 
@@ -136,10 +138,10 @@ Set MariaDB root password
 	[mysql] use mysql;
 	[mysql] update user set plugin='' where User='root'; # Forcing password usage
 	[mysql] flush privileges;
-	[mysql] SET PASSWORD FOR 'root'@'localhost' = PASSWORD('MyNewRootPassword');
+	[mysql] SET PASSWORD FOR 'root'@'localhost' = PASSWORD('SQLRootPassword');
 	[mysql] exit;
 Check password works
-	mysql -u root -pMyNewRootPassword
+	mysql -u root -pSQLRootPassword
 Create new database and add new user to it
 	[mysql]CREATE DATABASE wordpressdb;
 	[mysql]GRANT ALL PRIVILEGES ON wordpressdb.* To 'ryansqluser'@'localhost' IDENTIFIED BY 'MyNewPassword';
