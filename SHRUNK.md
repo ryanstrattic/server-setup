@@ -190,6 +190,7 @@ Install the Redis object cache. This results in a substantial improvement in the
 	sudo apt-get install redis-server redis-tools php-redis
 	wp plugin install wp-redis --activate
 	mv wp-content/plugins/wp-redis/object-cache.php wp-content/object-cache.php
+	sudo service php7.0-fpm restart
 
 # Uninstall default plugins
 	wp plugin uninstall hello
