@@ -134,8 +134,6 @@ DAEMON_OPTS="-a :80 \
 
 	sudo nano /etc/default/varnish
 
-	sudo cp /etc/varnish/default.vcl /etc/varnish/user.vcl
-
 Copy "user.vcl".
 
 	sudo nano /etc/varnish/user.vcl
