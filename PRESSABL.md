@@ -35,3 +35,6 @@ Two servers
 		Backups
 			Syncs once per week with AWS S3
 
+
+
+/home/ryan/Documents/storage.hellyer.kiwi/Important/backup.sh
