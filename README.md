@@ -89,18 +89,23 @@ Confirm the new login works with no password before continuing.
 	sudo ls -l /etc/letsencrypt/live/droplet3.hellyer.kiwi
 
 Generate Diffie Hellman group - takes a while!
+
 	sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
 Copy from "domain.conf".
+
 	sudo nano /etc/nginx/snippets/ssl-droplet3.hellyer.kiwi.conf
 
 Copy from "ssl-params.conf".
+
 	sudo nano /etc/nginx/snippets/ssl-params.conf
 
 Allow Nginx HTTPS through the firewall
+
 	sudo ufw allow 'Nginx Full'
 
 Reboot Nginx
+
 	sudo service nginx restart
 
 # Install Varnish
