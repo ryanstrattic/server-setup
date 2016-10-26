@@ -236,7 +236,7 @@ Set permalinks.
 Set permissions and ownership
 
 	sudo chown www-data:www-data wp-content/uploads -R
-	sudo chmod 744 uploads -R
+	sudo chmod 744 wp-content/uploads -R
 #	sudo chmod 400 ../../wp-config.php - this is causing problems
 
 # Make Git work
