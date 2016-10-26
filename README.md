@@ -209,7 +209,6 @@ Softlink to enable the site
 # Install WP CLI (it'd be nice to setup auto-updating in future)
 	cd /var/www/
 	sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
-	php wp-cli.phar --info # Check it works
 	sudo chmod +x wp-cli.phar
 	sudo mv wp-cli.phar /usr/local/bin/wp
 
