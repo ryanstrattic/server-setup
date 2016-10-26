@@ -44,29 +44,39 @@ Select defaults unless otherwise specified.
 
 # Create public key and copy to external server (used for backing stuff up later)
 Choose defaults (no password).
+
 	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
 Copy public key to the ~/.ssh/authorized_keys file on the external server
+
 	cat ~/.ssh/id_rsa.pub
 
 # Setup new user
 Create new user, set their password, give them sudo priviledges and log in as them.
+
 	adduser ryanuser # Create new user
 	usermod -aG sudo ryanuser
 	exit
 	ssh ryanuser@IPAddress
+
 Remove the need for a password when logging in as the new user. First we create the new SSH folder, then add our own public key (found on your local computer) to the authorized_keys file.
+
 	mkdir ~/.ssh
 	nano ~/.ssh/authorized_keys
 	chmod 600 ~/.ssh/authorized_keys
+
 Improve security by changing the line that specifies "PasswordAuthentication". uncomment it, then change its value to "no". Then reload the SSH daemon.
 	sudo nano /etc/ssh/sshd_config
 	sudo systemctl reload sshd
+
 Confirm the new login works with no password before continuing.
+
 	exit
 	ssh ryanuser@IPAddress
 
 # Adjust firewall settings
  Allow OpenSSH and enable UFW by selecting "y"
+
 	sudo ufw allow OpenSSH
 	sudo ufw enable
 
@@ -118,53 +128,71 @@ Add Varnish repository to aptitude.
 Change the port to "80" and manually set config file location to "user.vcl".
 DAEMON_OPTS="-a :80 \
 -f /etc/varnish/user.vcl \
+
 	sudo nano /etc/default/varnish
 
 	sudo cp /etc/varnish/default.vcl /etc/varnish/user.vcl
+
 Copy "user.vcl".
+
 	sudo nano /etc/varnish/user.vcl
+
 Reboot Nginx
+
 	sudo service nginx restart
 
 	sudo mkdir /etc/systemd/system/varnish.service.d/
+
 Copy "customexec.conf".
+
 	sudo nano /etc/systemd/system/varnish.service.d/customexec.conf
+
 Restart Varnish
+
 	sudo systemctl daemon-reload
 	sudo service varnish restart
 
 # Setup automatic security updates
 Follow the prompts to enable automatic security upgrades.
+
 	sudo apt-get install unattended-upgrades
 	sudo dpkg-reconfigure -plow unattended-upgrades
 
 # Install MariaDB
 	sudo apt-get install mariadb-server
+
 Set MariaDB root password
+
 	sudo mysql -u root
 	[mysql] use mysql;
 	[mysql] update user set plugin='' where User='root'; # Forcing password usage
 	[mysql] flush privileges;
 	[mysql] SET PASSWORD FOR 'root'@'localhost' = PASSWORD('SQLRootPassword');
+
 Create new database and add new user to it
+
 	[mysql]CREATE DATABASE wordpressdb;
 	[mysql]GRANT ALL PRIVILEGES ON wordpressdb.* To 'ryansqluser'@'localhost' IDENTIFIED BY 'MyNewPassword';
 	[mysql] exit;
 
 # Install PHP 7
 Install PHP FPM and PHP MySQL
+
 	sudo apt-get install php-fpm php-mysql
 
 Change "cgi.fix_pathinfo" to "0" for improved security.
+
 	sudo nano /etc/php/7.0/fpm/php.ini
 
 Replace existing files with "nginx.conf", "restrictions.conf" and "wordpress.conf"
+
 	sudo mkdir /etc/nginx/global/
 	sudo nano /etc/nginx/global/restrictions.conf
 	sudo nano /etc/nginx/nginx.conf
 	sudo nano /etc/nginx/global/wordpress.conf
 
 Replace with "default.txt".
+
 	sudo nano /etc/nginx/sites-available/default
 
 # Install WP CLI (it'd be nice to setup auto-updating in future)
@@ -180,21 +208,28 @@ Replace with "default.txt".
 	wp core config --dbname=wordpressdb --dbuser=ryansqluser --dbpass=66536653 --dbhost=localhost --dbprefix=test
 
 Move wp-config.php outside of the web root
+
 	sudo mv /var/www/droplet3.hellyer.kiwi/public_html/wp-config.php /var/www/droplet3.hellyer.kiwi/wp-config.php
 
 Add "wp-config.php" to beginning of file.
+
 	sudo nano /var/www/droplet3.hellyer.kiwi/public_html/wp-config.php
+
 Install WordPress.
+
 	wp core install --url=https://droplet3.hellyer.kiwi --title="Test Site" --admin_user=wordpressadmin --admin_password=wordpresspassword --admin_email=wordpress@gmail.com
+
 Set permalinks.
 	wp rewrite structure '/%postname%/'
 	sudo chown www-data:www-data uploads -R
 
 # Make Git work
+
 	ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
 
 # Install Redis
 Install the Redis object cache. This results in a substantial improvement in the loading of dynamic WordPress pages.
+
 	sudo apt-get install redis-server redis-tools php-redis
 	wp plugin install wp-redis --activate
 	mv wp-content/plugins/wp-redis/object-cache.php wp-content/object-cache.php
@@ -206,33 +241,38 @@ Install the Redis object cache. This results in a substantial improvement in the
 
 # Setup Cron jobs for WP CLI
 Copy "wordpress-updates.sh".
+
 	sudo nano /var/www/wordpress-updates.sh
 
 # Backup stuff to external server
 Copy "wordpress-backups.sh".
+
 	sudo nano /var/www/wordpress-backups.sh
 
 # Automate stuff
 Copy "crontab.txt".
+
 	sudo crontab -e
 
 # Auto-deployment from GitHub
 ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
 
 Copy to GitHub - https://github.com/settings/ssh
+
 	cat ~/.ssh/id_rsa.pub
 
-git clone git@github.com:githubrepo/server-setup.git .
-git config --user.email "github@gmail.com"
-git config --user.name "githubusername"
+	git clone git@github.com:githubrepo/server-setup.git .
+	git config --user.email "github@gmail.com"
+	git config --user.name "githubusername"
 
 Copy "auto-deployment.sh"
+
 	sudo nano /mnt/volume-nyc1-01/auto-deployment.sh
 
 # Hardening WordPress - WORK IN PROGRESS - GET MORE FROM https://codex.wordpress.org/Hardening_WordPress
-sudo chmod 744 uploads -R
-sudo chmod 600 ../../wp-config.php
+	sudo chmod 744 uploads -R
+	sudo chmod 600 ../../wp-config.php
 
 
 # Copy Pressabl network over
-wp search-replace
+	wp search-replace
