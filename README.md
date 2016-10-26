@@ -228,6 +228,12 @@ Set permalinks.
 	wp rewrite structure '/%postname%/'
 	sudo chown www-data:www-data uploads -R
 
+Set permissions and ownership
+
+	sudo chown www-data:www-data wp-content/uploads -R
+	sudo chmod 744 uploads -R
+	sudo chmod 400 ../../wp-config.php
+
 # Make Git work
 
 	ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
@@ -275,10 +281,8 @@ Copy "auto-deployment.sh"
 
 	sudo nano /mnt/volume-nyc1-01/auto-deployment.sh
 
-# Hardening WordPress - WORK IN PROGRESS - GET MORE FROM https://codex.wordpress.org/Hardening_WordPress
-https://bjornjohansen.no/block-access-to-php-files-with-nginx
-	sudo chmod 744 uploads -R
-	sudo chmod 600 ../../wp-config.php
+
 
 # Copy Pressabl network over
+
 	wp search-replace
