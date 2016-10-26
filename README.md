@@ -72,6 +72,7 @@ Remove the need for a password when logging in as the new user. First we create 
 
 Improve security by changing the line that specifies "PasswordAuthentication". uncomment it, then change its value to "no". Then reload the SSH daemon.
 	sudo nano /etc/ssh/sshd_config
+
 	sudo systemctl reload sshd
 
 Confirm the new login works with no password before continuing.
@@ -99,9 +100,6 @@ Confirm the new login works with no password before continuing.
 	sudo mkdir /var/www/droplet3.hellyer.kiwi/public_html/
 	sudo service nginx restart
 	sudo letsencrypt certonly -a webroot --webroot-path=/var/www/droplet3.hellyer.kiwi/public_html/ -d droplet3.hellyer.kiwi
-
-# Check Lets Encrypt certificates were indeed created
-	sudo ls -l /etc/letsencrypt/live/droplet3.hellyer.kiwi
 
 Generate Diffie Hellman group - takes a while!
 
