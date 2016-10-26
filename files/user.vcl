@@ -14,7 +14,7 @@ sub vcl_recv {
 
 	# Redirect http to https
 	if ( (req.http.host ~ "^(?i)droplet3.hellyer.kiwi") && req.http.X-Forwarded-Proto !~ "(?i)https") {
-			return (synth(750, ""));
+		return (synth(750, ""));
 	}
 
 }
@@ -41,9 +41,9 @@ sub vcl_synth {
 
 	# Redirect http to https
 	if (resp.status == 750) {
-			set resp.status = 301;
-			set resp.http.Location = "https://droplet3.hellyer.kiwi" + req.url;
-			return(deliver);
+		set resp.status = 301;
+		set resp.http.Location = "https://droplet3.hellyer.kiwi" + req.url;
+		return(deliver);
 	}
 
 }
