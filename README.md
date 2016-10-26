@@ -113,11 +113,16 @@ Copy from "ssl-params.conf".
 
 	sudo nano /etc/nginx/snippets/ssl-params.conf
 
+
+Removing default config now that we've obtained our TLS certificate
+
+	sudo rm /etc/nginx/sites-available/default
+
 Allow Nginx HTTPS through the firewall
 
 	sudo ufw allow 'Nginx Full'
 
-Reboot Nginx
+Reboot Nginx (PROBABLY NOT NECESSARY)
 
 	sudo service nginx restart
 
@@ -128,6 +133,7 @@ Add Varnish repository to aptitude.
 	sudo sh -c 'echo "deb https://repo.varnish-cache.org/ubuntu/ trusty varnish-4.0" >> /etc/apt/sources.list.d/varnish-cache.list'
 	sudo apt-get update
 	sudo apt-get install varnish
+
 Change the port to "80" and manually set config file location to "user.vcl".
 DAEMON_OPTS="-a :80 \
 -f /etc/varnish/user.vcl \
@@ -199,10 +205,6 @@ Replace with "domain.txt".
 Softlink to enable the site
 
 	sudo ln -s /etc/nginx/sites-available/droplet3.hellyer.kiwi.conf /etc/nginx/sites-enabled/droplet3.hellyer.kiwi.conf
-
-Removing pointless default config
-
-	sudo rm /etc/nginx/sites-available/default
 
 # Install WP CLI (it'd be nice to setup auto-updating in future)
 	cd /var/www/
