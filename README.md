@@ -90,7 +90,7 @@ Confirm the new login works with no password before continuing.
 	sudo apt-get install nginx
 	sudo ufw allow 'Nginx HTTP'
 
-# Implement new Nginx configuration - copy default-temporary.conf
+# Implement new Nginx configuration - copy default.txt
 	sudo nano /etc/nginx/sites-available/default
 
 # Setup Lets Encrypt
@@ -107,7 +107,7 @@ Generate Diffie Hellman group - takes a while!
 
 	sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
-Copy from "domain.conf".
+Copy from "ssl-domain.conf".
 
 	sudo nano /etc/nginx/snippets/ssl-droplet3.hellyer.kiwi.conf
 
@@ -198,7 +198,15 @@ Replace existing files with "nginx.conf", "restrictions.conf" and "wordpress.con
 
 Replace with "default.txt".
 
-	sudo nano /etc/nginx/sites-available/default
+	sudo nano /etc/nginx/sites-available/droplet3.hellyer.kiwi.conf
+
+Softlink to enable the site
+
+	ln -s /etc/nginx/sites-available/droplet3.hellyer.kiwi.conf /etc/nginx/sites-enabled/droplet3.hellyer.kiwi.conf
+
+Removing pointless default config
+
+	sudo rm /etc/nginx/sites-available/default
 
 # Install WP CLI (it'd be nice to setup auto-updating in future)
 	cd /var/www/
@@ -232,7 +240,7 @@ Set permissions and ownership
 
 	sudo chown www-data:www-data wp-content/uploads -R
 	sudo chmod 744 uploads -R
-	sudo chmod 400 ../../wp-config.php
+#	sudo chmod 400 ../../wp-config.php - this is causing problems
 
 # Make Git work
 
