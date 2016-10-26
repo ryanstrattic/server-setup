@@ -14,6 +14,7 @@ Server details
 	droplet3.hellyer.kiwi
 
 SQL
+
 	ryansqluser
 	SQLRootPassword
 	wordpressdb
@@ -239,9 +240,10 @@ Install the Redis object cache. This results in a substantial improvement in the
 	mv wp-content/plugins/wp-redis/object-cache.php wp-content/object-cache.php
 	sudo service php7.0-fpm restart
 
-# Uninstall default plugins
+# Remove and add plugins
 	wp plugin uninstall hello
 	wp plugin uninstall akismet
+	wp plugin install google-authenticator --activate
 
 # Setup Cron jobs for WP CLI
 Copy "wordpress-updates.sh".
@@ -274,9 +276,9 @@ Copy "auto-deployment.sh"
 	sudo nano /mnt/volume-nyc1-01/auto-deployment.sh
 
 # Hardening WordPress - WORK IN PROGRESS - GET MORE FROM https://codex.wordpress.org/Hardening_WordPress
+https://bjornjohansen.no/block-access-to-php-files-with-nginx
 	sudo chmod 744 uploads -R
 	sudo chmod 600 ../../wp-config.php
-
 
 # Copy Pressabl network over
 	wp search-replace
