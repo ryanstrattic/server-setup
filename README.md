@@ -198,7 +198,7 @@ Replace with "domain.txt".
 
 Softlink to enable the site
 
-	ln -s /etc/nginx/sites-available/droplet3.hellyer.kiwi.conf /etc/nginx/sites-enabled/droplet3.hellyer.kiwi.conf
+	sudo ln -s /etc/nginx/sites-available/droplet3.hellyer.kiwi.conf /etc/nginx/sites-enabled/droplet3.hellyer.kiwi.conf
 
 Removing pointless default config
 
