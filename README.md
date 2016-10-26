@@ -239,10 +239,6 @@ Set permissions and ownership
 	sudo chmod 744 wp-content/uploads -R
 #	sudo chmod 400 ../../wp-config.php - this is causing problems
 
-# Make Git work
-
-	ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
-
 # Install Redis
 Install the Redis object cache. This results in a substantial improvement in the loading of dynamic WordPress pages.
 
