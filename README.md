@@ -223,7 +223,7 @@ Move wp-config.php outside of the web root
 
 Add "wp-config.php" to beginning of file.
 
-	sudo nano /var/www/droplet3.hellyer.kiwi/public_html/wp-config.php
+	sudo nano /var/www/droplet3.hellyer.kiwi/wp-config.php
 
 Install WordPress.
 
