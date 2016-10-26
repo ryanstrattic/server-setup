@@ -192,7 +192,7 @@ Replace existing files with "nginx.conf", "restrictions.conf" and "wordpress.con
 	sudo nano /etc/nginx/nginx.conf
 	sudo nano /etc/nginx/global/wordpress.conf
 
-Replace with "default.txt".
+Replace with "domain.txt".
 
 	sudo nano /etc/nginx/sites-available/droplet3.hellyer.kiwi.conf
 
