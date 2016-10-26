@@ -3,38 +3,42 @@
 * Point domain at new IP address
 * MOUNT 20 GB DRIVE AND USE THAT INSTEAD OF /VAR/WWW/ - automatically mounts on reboot
 
-# Notes and required improvements
-* Implementation time tested at 50 minutes
-* List all variables at start of document
-* Just replace whole .vlc file instead of editing
-* Just replace whole nginx.conf and default instead of editing
+Variables which need to be changed before using this tutorial:
 
-== https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-16-04
-== https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-16-04
-== https://www.digitalocean.com/community/tutorials/how-to-configure-varnish-cache-4-0-with-ssl-termination-on-ubuntu-14-04
-== https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-16-04
+Server details
 
-var IPAddress = 
-/var/www/ = 
-var your_email@example.com = 
-var ryanuser = 
-var ryansqluser = 
-var SQLRootPassword = 
-var wordpressdb = 
-var droplet3.hellyer.kiwi = 
-external_server_username = 
-IPExternalAddress = 
-/external/server/path/ = 
-git@github.com:ryanhellyer/server-setup.git
-[Git email] ryanhellyer@gmail.com"
-[GitHub name] Ryan Hellyer
-[WordPress site title] Test Site
-[WordPress username] wordpressadmin
-[WordPress password[ wordpresspassword
-[WordPress user email] wordpress@gmail.com
-var githubrepo = 
-var github@gmail.com = 
-var githubusername = 
+	IPAddress
+	/var/www/
+	your_email@example.com
+	ryanuser
+	droplet3.hellyer.kiwi
+
+SQL
+	ryansqluser
+	SQLRootPassword
+	wordpressdb
+
+External backup server
+
+	external_server_username
+	IPExternalAddress
+	/external/server/path/
+
+GitHub
+
+	git@github.com:ryanhellyer/server-setup.git
+	ryanhellyer@gmail.com"
+	Ryan Hellyer
+	githubrepo
+	github@gmail.com
+	githubusername
+
+WordPress
+
+	Test Site
+	wordpressadmin
+	wordpresspassword
+	wordpress@gmail.com
 
 
 Select defaults unless otherwise specified.
