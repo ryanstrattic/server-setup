@@ -1,3 +1,13 @@
+CHANGES: MyNewPassword - needs var set
+CHANGED ALREADY: Change "cgi.fix_pathinfo" to "0" and uncomment it's line for improved security.
+Replace with "domain.txt". - should be domain.conf
+Doesn't match password created earlier: wp core config --dbname=pressabl --dbuser=ryan --dbpass=66536653 --dbhost=localhost --dbprefix=test
+Needs the quotes like this, so that funky passwords work, the double quotes failed ....wp core config --dbname=pressabl --dbuser=ryan --dbpass='ztdpaA7387!#' --dbhost=localhost --dbprefix=pressabl
+Need vars for these ... wp core install --url=https://wordpress.hellyer.kiwi --title="Test Site" --admin_user=wordpressadmin --admin_password=wordpresspassword --admin_email=wordpress@gmail.com
+Needed wp-content added to the path ... sudo chown www-data:www-data wp-content/uploads -R
+
+
+
 # Things to do first
 * Install Ubuntu 16.04 with public key authentication
 * Point domain at new IP address
