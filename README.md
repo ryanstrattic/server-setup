@@ -4,6 +4,8 @@ Can use the following to switch Varnish ports
 # sudo varnishd -f /etc/varnish/user.vcl -s malloc,1G -a 0.0.0.0:8081
 # sudo service varnish start
 
+May need to do this too:
+http://deshack.net/how-to-varnish-listen-port-80-systemd/
 
 
 CHANGES: MyNewPassword - needs var set
