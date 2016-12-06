@@ -1,3 +1,11 @@
+This is all screwed up. Varnish should be on another port (used 8081 on new Pressabl), not port 80.
+Can use the following to switch Varnish ports
+# sudo service varnish stop
+# sudo varnishd -f /etc/varnish/user.vcl -s malloc,1G -a 0.0.0.0:8081
+# sudo service varnish start
+
+
+
 CHANGES: MyNewPassword - needs var set
 CHANGED ALREADY: Change "cgi.fix_pathinfo" to "0" and uncomment it's line for improved security.
 Replace with "domain.txt". - should be domain.conf
