@@ -1,3 +1,7 @@
+For pressabl, daisy chain the letsencrypts together all at once
+# sudo letsencrypt certonly -a webroot --webroot-path=/mnt/volume-nyc1-01/wordpress.hellyer.kiwi/public_html/ -d tweets.hellyer.kiwi -d wordpress.hellyer.kiwi
+
+
 This is all screwed up. Varnish should be on another port (used 8081 on new Pressabl), not port 80.
 Can use the following to switch Varnish ports
 # sudo service varnish stop
