@@ -1,3 +1,17 @@
+RSYNC FROM OTHER SERVER:
+sudo rsync -chavzP --stats ryan@109.74.195.197:/usr/share/nginx/html/wp-content/blogs.dir/ /mnt/volume-nyc1-01/wordpress.hellyer.kiwi/public_html/wp-content/blogs.dir/
+
+
+
+LATER:
+https for dunedinicehockey.co.nz
+	Make sure prsb.co works with https
+
+
+
+
+
+
 For pressabl, daisy chain the letsencrypts together all at once
 # sudo letsencrypt certonly -a webroot --webroot-path=/mnt/volume-nyc1-01/wordpress.hellyer.kiwi/public_html/ -d tweets.hellyer.kiwi -d wordpress.hellyer.kiwi
 
