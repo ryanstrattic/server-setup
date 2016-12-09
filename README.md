@@ -1,3 +1,5 @@
+sudo apt-get install s3cmd - for backup server
+
 Gzip settings in nginx.conf need added
 worker_processes  1; // equal to number of CPU's
 
