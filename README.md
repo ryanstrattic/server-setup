@@ -1,3 +1,5 @@
+Shouldn't add root key to external server - found near beginning of instructions
+
 sudo apt-get install s3cmd - for backup server
 
 Gzip settings in nginx.conf need added
