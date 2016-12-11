@@ -12,11 +12,6 @@ sub vcl_recv {
 	# Typically you clean up the request here, removing cookies you don't need,
 	# rewriting the request, etc.
 
-	# Redirect http to https
-	if ( (req.http.host ~ "^(?i)droplet3.hellyer.kiwi") && req.http.X-Forwarded-Proto !~ "(?i)https") {
-		return (synth(750, ""));
-	}
-
 }
 
 sub vcl_backend_response {
@@ -38,12 +33,5 @@ sub vcl_deliver {
 }
 
 sub vcl_synth {
-
-	# Redirect http to https
-	if (resp.status == 750) {
-		set resp.status = 301;
-		set resp.http.Location = "https://droplet3.hellyer.kiwi" + req.url;
-		return(deliver);
-	}
 
 }
