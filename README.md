@@ -1,4 +1,4 @@
-Add custom 404 page to Varnish block - see Pressabl
+Add custom 404 (and 500/502/503/504) page to Varnish block - see Pressabl
 
 Shouldn't add root key to external server - found near beginning of instructions
 
