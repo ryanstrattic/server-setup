@@ -1,3 +1,5 @@
+Add custom 404 page to Varnish block - see Pressabl
+
 Shouldn't add root key to external server - found near beginning of instructions
 
 sudo apt-get install s3cmd - for backup server
