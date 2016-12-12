@@ -207,6 +207,7 @@ Restart Varnish
 	sudo service varnish restart
 
 # Setup automatic security updates
+# should also add features from here: https://help.ubuntu.com/lts/serverguide/automatic-updates.html
 Follow the prompts to enable automatic security upgrades.
 
 	sudo apt-get install unattended-upgrades
