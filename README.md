@@ -2,6 +2,18 @@ Need to install mail:
 sudo apt-get install sendmail #THIS IS NTO OWRKING :/
 
 
+** For low RAM servers, need swap file to stop shit crashing when memory maxes out: **
+sudo fallocate -l 2G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo swapon -s
+sudo nano /etc/fstab
+	# add this new line to the end of the file to make it reload on reboot
+	/swapfile none swap sw 0 0
+
+
+
 Add custom 404 (and 500/502/503/504) page to Varnish block - see Pressabl
 
 Shouldn't add root key to external server - found near beginning of instructions
