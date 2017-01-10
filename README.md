@@ -1,6 +1,8 @@
 Need to install mail:
 sudo apt-get install sendmail #THIS IS NTO OWRKING :/
 
+** Install FFMPEG for audio site **
+sudo apt-get install ffmpeg
 
 ** For low RAM servers, need swap file to stop shit crashing when memory maxes out: **
 sudo fallocate -l 2G /swapfile
