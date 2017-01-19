@@ -1,6 +1,7 @@
 Need to install mail:
 sudo apt-get install sendmail #THIS IS NTO OWRKING :/
 
+
 ** Install FFMPEG for audio site **
 sudo apt-get install ffmpeg
 
@@ -202,7 +203,7 @@ Add Varnish repository to aptitude.
 	sudo apt-get install varnish
 
 Change the port to "80" and manually set config file location to "user.vcl".
-DAEMON_OPTS="-a :80 \
+DAEMON_OPTS="-a :8081 \
 -f /etc/varnish/user.vcl \
 
 	sudo nano /etc/default/varnish
@@ -350,6 +351,9 @@ Copy "auto-deployment.sh"
 
 	sudo nano /mnt/volume-nyc1-01/auto-deployment.sh
 
+
+# Install HTOP for performance analysis
+sudo apt-get install htop
 
 
 # Copy Pressabl network over
