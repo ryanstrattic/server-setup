@@ -1,6 +1,8 @@
 Need to install mail:
 sudo apt-get install sendmail #THIS IS NTO OWRKING :/
 
+** Useful for zipping stuff during backups **
+sudo apt-get install zip
 
 ** Install FFMPEG for audio site **
 sudo apt-get install ffmpeg
