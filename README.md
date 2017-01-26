@@ -1,5 +1,3 @@
-Need to install mail:
-sudo apt-get install sendmail #THIS IS NTO OWRKING :/
 
 ** Useful for zipping stuff during backups **
 sudo apt-get install zip
@@ -357,7 +355,5 @@ Copy "auto-deployment.sh"
 # Install HTOP for performance analysis
 sudo apt-get install htop
 
-
-# Copy Pressabl network over
-
-	wp search-replace
+# Setup mail handling
+sudo apt-get install sendmail
