@@ -13,3 +13,6 @@
 
 # Auto deployment from Git
 * * * * *  bash /var/www/auto-deployment.sh
+
+# Firing up the WordPress Cron system
+* * * * * bash /mnt/volume-nyc1-01/wp-cron.sh

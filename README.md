@@ -31,15 +31,6 @@ sudo rsync -chavzP --stats ryan@109.74.195.197:/usr/share/nginx/html/wp-content/
 
 
 
-LATER:
-https for dunedinicehockey.co.nz
-	Make sure prsb.co works with https
-
-
-
-
-
-
 For pressabl, daisy chain the letsencrypts together all at once
 # sudo letsencrypt certonly -a webroot --webroot-path=/mnt/volume-nyc1-01/wordpress.hellyer.kiwi/public_html/ -d tweets.hellyer.kiwi -d wordpress.hellyer.kiwi
 
@@ -335,6 +326,9 @@ Copy "wordpress-backups.sh".
 Copy "crontab.txt".
 
 	sudo crontab -e
+
+Copy "wp-cron.sh" and edit it's domain name
+	sudo nano /var/www/wp-cron.sh
 
 # Auto-deployment from GitHub
 ssh-keygen -t rsa -b 4096 -C "ryanhellyer@gmail.com"
