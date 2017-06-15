@@ -266,6 +266,9 @@ Softlink to enable the site
 
 	sudo ln -s /etc/nginx/sites-available/droplet3.hellyer.kiwi.conf /etc/nginx/sites-enabled/droplet3.hellyer.kiwi.conf
 
+Install ImageMagick
+	sudo apt-get install php-imagick
+
 # Install WP CLI (it'd be nice to setup auto-updating in future)
 	cd /var/www/
 	sudo curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
