@@ -268,6 +268,7 @@ Softlink to enable the site
 
 Install ImageMagick
 	sudo apt-get install php-imagick
+	sudo service php7.0-fpm restart
 
 # Install WP CLI (it'd be nice to setup auto-updating in future)
 	cd /var/www/
