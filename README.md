@@ -1,3 +1,4 @@
+SHOULD INSTALL NAXSI
 
 ** Useful for zipping stuff during backups **
 sudo apt-get install zip
