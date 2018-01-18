@@ -51,7 +51,7 @@ Alos need to remove redirect for https from VCL stuff
 CHANGES: MyNewPassword - needs var set
 CHANGED ALREADY: Change "cgi.fix_pathinfo" to "0" and uncomment it's line for improved security.
 Replace with "domain.txt". - should be domain.conf
-Doesn't match password created earlier: wp core config --dbname=pressabl --dbuser=ryan --dbpass=66536653 --dbhost=localhost --dbprefix=test
+Doesn't match password created earlier: wp core config --dbname=pressabl --dbuser=ryan --dbpass=PASSWORD --dbhost=localhost --dbprefix=test
 Needs the quotes like this, so that funky passwords work, the double quotes failed ....wp core config --dbname=pressabl --dbuser=ryan --dbpass='ztdpaA7387!#' --dbhost=localhost --dbprefix=pressabl
 Need vars for these ... wp core install --url=https://wordpress.hellyer.kiwi --title="Test Site" --admin_user=wordpressadmin --admin_password=wordpresspassword --admin_email=wordpress@gmail.com
 Needed wp-content added to the path ... sudo chown www-data:www-data wp-content/uploads -R
@@ -280,7 +280,7 @@ Install ImageMagick
 	sudo chown ryan:ryan droplet3.hellyer.kiwi/public_html/
 	cd /var/www/droplet3.hellyer.kiwi/public_html/
 	wp core download
-	wp core config --dbname=wordpressdb --dbuser=ryansqluser --dbpass=66536653 --dbhost=localhost --dbprefix=test
+	wp core config --dbname=wordpressdb --dbuser=ryansqluser --dbpass=PASSWORD --dbhost=localhost --dbprefix=test
 
 Move wp-config.php outside of the web root
 
