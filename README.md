@@ -131,6 +131,7 @@ Remove the need for a password when logging in as the new user. First we create 
 	chmod 600 ~/.ssh/authorized_keys
 
 Improve security by changing the line that specifies "PasswordAuthentication". uncomment it, then change its value to "no". Then reload the SSH daemon.
+
 	sudo nano /etc/ssh/sshd_config
 
 	sudo systemctl reload sshd
