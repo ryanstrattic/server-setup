@@ -13,15 +13,19 @@ sub vcl_recv {
 	# rewriting the request, etc.
 
 }
-
 sub vcl_backend_response {
-	# Happens after we have read the response headers from the backend.
-	#
-	# Here you clean the response headers, removing silly Set-Cookie headers
-	# and other mistakes your backend does.
+        # Happens after we have read the response headers from the backend.
+        #
+        # Here you clean the response headers, removing silly Set-Cookie headers
+        # and other mistakes your backend does.
 
-	set beresp.ttl = 10s;
-	set beresp.grace = 1h;
+
+	# Enable this if you want to use Edge Side server includes
+#       set beresp.do_esi = true; // Do ESI processing
+
+
+        set beresp.ttl = 300s;
+        set beresp.grace = 1h;
 
 }
 
