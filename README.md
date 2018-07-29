@@ -1,5 +1,7 @@
 SHOULD INSTALL NAXSI
 
+PHP7.2 ... remember to change .conf file content as well
+
 ** Useful for zipping stuff during backups **
 sudo apt-get install zip
 
