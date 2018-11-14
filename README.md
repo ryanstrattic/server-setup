@@ -1,3 +1,5 @@
+SHOULD INCREASE MAX UPLOAD SIZE
+
 SHOULD INSTALL NAXSI
 
 PHP7.2 ... remember to change .conf file content as well
