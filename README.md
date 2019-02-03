@@ -1,5 +1,7 @@
 SHOULD INCREASE MAX UPLOAD SIZE
 
+SHOULD TURN ON OPCACHE
+
 SHOULD INSTALL NAXSI
 
 PHP7.2 ... remember to change .conf file content as well
