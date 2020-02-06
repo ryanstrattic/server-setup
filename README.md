@@ -253,7 +253,7 @@ Create new database and add new user to it
 # Install PHP 7
 Install PHP FPM and PHP MySQL and PHP mbstring
 
-	sudo apt-get install php-fpm php-mysql php7.0-mbstring
+	sudo apt-get install php-fpm php-mysql php7.0-mbstring php7.0-zip
 
 Change "cgi.fix_pathinfo" to "0" for improved security.
 
