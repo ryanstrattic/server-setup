@@ -253,11 +253,11 @@ Create new database and add new user to it
 # Install PHP 7
 Install PHP FPM and PHP MySQL and PHP mbstring
 
-	sudo apt-get install php-fpm php-mysql php7.0-mbstring php7.0-zip
+	sudo apt-get install php-fpm php-mysql php7.3-mbstring php7.3-zip php7.3-intl
 
 Change "cgi.fix_pathinfo" to "0" for improved security.
 
-	sudo nano /etc/php/7.0/fpm/php.ini
+	sudo nano /etc/php/7.3/fpm/php.ini
 
 Replace existing files with "nginx.conf", "restrictions.conf" and "wordpress.conf"
 
@@ -276,8 +276,8 @@ Softlink to enable the site
 
 Install ImageMagick and new GD library
 	sudo apt-get install php-imagick
-	sudo apt-get install php7.0-gd
-	sudo service php7.0-fpm restart
+	sudo apt-get install php7.3-gd
+	sudo service php7.3-fpm restart
 
 # Install WP CLI (it'd be nice to setup auto-updating in future)
 	cd /var/www/
