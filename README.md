@@ -253,7 +253,7 @@ Create new database and add new user to it
 # Install PHP 7
 Install PHP FPM and PHP MySQL and PHP mbstring
 
-	sudo apt-get install php-fpm php-mysql php7.3-mbstring php7.3-zip php7.3-intl
+	sudo apt install php7.3-fpm php7.3-mysql php7.3-mbstring php7.3-zip php7.3-intl php7.3-imagick php7.3-gd
 
 Change "cgi.fix_pathinfo" to "0" for improved security.
 
@@ -273,11 +273,6 @@ Replace with "domain.txt".
 Softlink to enable the site
 
 	sudo ln -s /etc/nginx/sites-available/droplet3.hellyer.kiwi.conf /etc/nginx/sites-enabled/droplet3.hellyer.kiwi.conf
-
-Install ImageMagick and new GD library
-	sudo apt-get install php-imagick
-	sudo apt-get install php7.3-gd
-	sudo service php7.3-fpm restart
 
 # Install WP CLI (it'd be nice to setup auto-updating in future)
 	cd /var/www/
