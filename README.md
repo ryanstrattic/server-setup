@@ -39,7 +39,8 @@ sudo rsync -chavzP --stats ryan@109.74.195.197:/usr/share/nginx/html/wp-content/
 
 
 For pressabl, daisy chain the letsencrypts together all at once
-# sudo letsencrypt certonly -a webroot --webroot-path=/mnt/volume-nyc1-01/wordpress.hellyer.kiwi/public_html/ -d tweets.hellyer.kiwi -d wordpress.hellyer.kiwi
+#sudo letsencrypt certonly -a webroot --cert-name=pressabl1 --webroot-path=/path/hellyer.kiwi/public_html/ -d tweets.hellyer.kiwi -d wordpress.hellyer.kiwi wordpress.hellyer.kiwi
+(do not use certbot as it edits the Ngixn configs)
 
 
 This is all screwed up. Varnish should be on another port (used 8081 on new Pressabl), not port 80.
