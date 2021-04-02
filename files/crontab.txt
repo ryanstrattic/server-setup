@@ -1,5 +1,5 @@
 # Renew Lets Encrypt certificates every Monday at 2:30am and reload Nginx at 2:35am ($
-30 2 * * 1 /usr/bin/letsencrypt renew >> /var/log/le-renew.log
+30 2 * * 1 /usr/bin/letsencrypt renew >> /var/log/le-renew.log # do not use certbot as it edits the Nginx configs.
 35 2 * * 1 /bin/systemctl reload nginx
 
 # Firing up the WordPress Cron system
